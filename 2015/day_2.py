@@ -30,5 +30,8 @@ def get_total_paper(data: list[str]) -> int:
     return answer
 
 if __name__ == "__main__":
-    print(convert_to_str_list("29x13x26"))
-    print(get_total_paper(["2x3x4", "1x1x10"]))
+    file = "data.txt"
+    data = read_input(file)
+    # print(convert_to_str_list("29x13x26"))
+    amount = get_total_paper(data)
+    print(f"The elves need {amount} square feet of wrapping paper.")
