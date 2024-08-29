@@ -17,11 +17,12 @@ def convert_to_int_list(data:list[str]) -> list[list[str]]:
 
 def calculate_paper_amount(data: list[str]) -> int:
     """Calculates the amount of wrapping paper needed for one present."""
-    smallest_side = 0
-    answer = 0
-    side_a = data[0] * data[1]
-    side_b = data[1] * data[2]
-    side_c = data[2] * data[0]
+    side_a = int(data[0]) * int(data[1])
+    side_b = int(data[1]) * int(data[2])
+    side_c = int(data[2]) * int(data[0])
+    smallest_side = min(side_a, side_b, side_c)
+    answer = smallest_side + (2 * side_a) + (2 * side_b) + (2 * side_c)
+    return answer
 
 if __name__ == "__main__":
     print(convert_to_int_list(["29x13x26", "11x11x14"]))
