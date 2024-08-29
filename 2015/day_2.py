@@ -6,14 +6,11 @@ def read_input(filename: str) -> list[str]:
     with open(filename, "r") as f:
         return f.readlines()
 
-def convert_to_int_list(data:list[str]) -> list[list[str]]:
-    """Converts a list of strings into a list of lists of strings."""
-    answer = []
-    for i in data:
-        new_list = i.split("x")
-        print(new_list)
-        answer.append(new_list)
-    return answer
+def convert_to_str_list(data:str) -> list[str]:
+    """Converts a string into a list of strings."""
+    new_list = data.split("x")
+    print(new_list)
+    return new_list
 
 def calculate_paper_amount(data: list[str]) -> int:
     """Calculates the amount of wrapping paper needed for one present."""
@@ -24,5 +21,14 @@ def calculate_paper_amount(data: list[str]) -> int:
     answer = smallest_side + (2 * side_a) + (2 * side_b) + (2 * side_c)
     return answer
 
+def get_total_paper(data: list[str]) -> int:
+    """Calculates the total amout of paper needed."""
+    answer = 0
+    for i in data:
+        strings_list = convert_to_str_list(i)
+        paper_needed = calculate_paper_amount(strings_list)
+        answer += paper_needed
+    return answer
+
 if __name__ == "__main__":
-    print(convert_to_int_list(["29x13x26", "11x11x14"]))
+    print(convert_to_int_list("29x13x26"))
