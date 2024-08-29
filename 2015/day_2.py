@@ -9,7 +9,6 @@ def read_input(filename: str) -> list[str]:
 def convert_to_str_list(data:str) -> list[str]:
     """Converts a string into a list of strings."""
     new_list = data.split("x")
-    print(new_list)
     return new_list
 
 def calculate_paper_amount(data: list[str]) -> int:
@@ -31,4 +30,5 @@ def get_total_paper(data: list[str]) -> int:
     return answer
 
 if __name__ == "__main__":
-    print(convert_to_int_list("29x13x26"))
+    print(convert_to_str_list("29x13x26"))
+    print(get_total_paper(["2x3x4", "1x1x10"]))
