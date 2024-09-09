@@ -29,8 +29,20 @@ def get_total_paper(data: list[str]) -> int:
         answer += paper_needed
     return answer
 
+# Part 2 functions
+
+def calculate_volume(dimensions:list[str]) -> int:
+    """Calculates the volume of a present."""
+    return int(dimensions[0]) * int(dimensions[1]) * int(dimensions[2])
+
+
+def calculate_around_present(dimensions: list[str]) -> int:
+    """Calculates the shortest distance around a present. """
+    dimensions.sort()
+    return (2 * int(dimensions[0]) + 2 * int(dimensions[1]))
+
 if __name__ == "__main__":
-    file = "data.txt"
+    file = "day_2_data.txt"
     data = read_input(file)
     # print(convert_to_str_list("29x13x26"))
     amount = get_total_paper(data)
