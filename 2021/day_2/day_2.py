@@ -13,21 +13,38 @@ def give_instructions(file: list[str]) -> int:
 
     for i in file:
         direction, value = i.split()
-        # if split_string[0] == "forward":
-        #     horizontal += int(split_string[1])
-        # if split_string[0] == "up":
-        #     vertical -= int(split_string[1])
-        # if split_string[0] == "down":
-        #     vertical += int(split_string[1])
-        match split_string[0]:
+        match direction:
             case "forward":
-                horizontal += int(split_string[1])
+                horizontal += int(value)
             case "down":
-                vertical += int(split_string[1])
+                vertical += int(value)
             case "up":
-                vertical -= int(split_string[1])
+                vertical -= int(value)
 
     return horizontal * vertical
+
+
+def give_complicated_instructions(file: list[str]) -> int:
+    """Gives more complicated intructions to the submarine."""
+    horizontal = 0
+    vertical = 0
+    aim = 0
+
+    for i in file:
+        direction, value = i.split()
+        match direction:
+            case "forward":
+                horizontal += int(value)
+                vertical += int(value) * aim
+            case "down":
+                aim += int(value)
+            case "up":
+                aim -= int(value)
+
+    return horizontal * vertical
+
+
+
     
 if __name__ == "__main__":
     
@@ -36,3 +53,7 @@ if __name__ == "__main__":
     answer_1 = give_instructions(data)
 
     print(f"Part 1: {answer_1}")
+
+    answer_2 = give_complicated_instructions(data)
+
+    print(f"Part 2: {answer_2}")
