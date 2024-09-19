@@ -43,6 +43,53 @@ def change_binary_to_decimal(binary: str) -> int:
     return int(binary, 2)
 
 
+def find_oxygen_generator_rating() -> str:
+    """Calculates the oxygen generator rating."""
+    final_list = read_input(
+        "day_3_data.txt")
+    bit_length = len(final_list[0])
+
+    for i in range(bit_length):
+        if len(final_list) == 1:  # Stop if only one number remains
+            break
+
+        # Calculate the most common bit at the current position (i)
+        count_ones = sum(1 for number in final_list if number[i] == '1')
+        count_zeroes = len(final_list) - count_ones
+
+        # Most common bit: '1' if ones are equal or more, otherwise '0'
+        most_common_bit = '1' if count_ones >= count_zeroes else '0'
+
+        # Filter the list by keeping numbers that match the most common bit at position i
+        final_list = [
+            reading for reading in final_list if reading[i] == most_common_bit]
+
+    return final_list[0]
+
+
+def find_CO2_scrubber_rating() -> str:
+    """Calculates the CO2 scrubber rating."""
+    final_list = read_input(
+        "day_3_data.txt")
+    bit_length = len(final_list[0])
+
+    for i in range(bit_length):
+        if len(final_list) == 1:
+            break
+
+        # Calculate the most common bit at the current position
+        count_ones = sum(1 for number in final_list if number[i] == '1')
+        count_zeroes = len(final_list) - count_ones
+
+        least_common_bit = '0' if count_ones >= count_zeroes else '1'
+
+        final_list = [
+            reading for reading in final_list if reading[i] == least_common_bit]
+
+    return final_list[0]
+
+
+
 if __name__ == "__main__":
 
     data = read_input("day_3_data.txt")
@@ -52,3 +99,9 @@ if __name__ == "__main__":
     answer_1 = change_binary_to_decimal(gamma_rate) * change_binary_to_decimal(epsilon_rate)
 
     print(f"Part 1: {answer_1}")
+
+    oxygen_rating = find_oxygen_generator_rating()
+    co2_rating = find_CO2_scrubber_rating()
+    answer_2 = change_binary_to_decimal(oxygen_rating) * change_binary_to_decimal(co2_rating)
+
+    print(f"Part 2: {answer_2}")
