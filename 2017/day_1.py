@@ -19,6 +19,22 @@ def find_sum(s: str) -> int:
 
     return answer
 
+def find_sum_2(s: str) -> int:
+    """Finds the sum of all digits that match the one 1/2len away."""
+    answer = 0
+    marker = int(len(s) / 2)
+
+    for i in range(len(s)):
+        if i < marker:
+            if s[i] == s[i+marker]:
+                answer += int(s[i])
+        if i >= marker:
+            if s[i] == s[i-marker]:
+                answer += int(s[i])
+
+    return answer
+
+
 
 if __name__ == "__main__":
 
@@ -27,3 +43,6 @@ if __name__ == "__main__":
 
     answer_1 = find_sum(data)
     print(f"Part 1: {answer_1}")
+
+    answer_2 = find_sum_2(data)
+    print(f"Part 2: {answer_2}")
