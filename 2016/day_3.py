@@ -1,7 +1,7 @@
 """Day 3: Squares With Three Sides"""
 
 
-def read_input(filename: str) -> str:
+def read_input(filename: str) -> list[str]:
     """Reads a text file into a str."""
     with open(filename, "r", encoding="UTF-8") as f:
         return f.readlines()
