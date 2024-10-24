@@ -34,7 +34,34 @@ def calculate_checksum(data: list[list]) -> int:
     return checksum
 
 
+def find_even_division_result(line: list) -> int:
+    """Returns the result of two numbers where one evenly divides the other."""
+    result = None  # Initialize result
+    for a in line:
+        for b in line:
+            if a == b:
+                continue
+            if int(a) % int(b) == 0:
+                result = int(a) / int(b)
+
+    return int(result)
+
+
+def calculate_even_division_sum(data: list[list]) -> int:
+    """Calculates the sum of each row's even division result."""
+    total_sum = 0
+    for line in data:
+        line_result = find_even_division_result(line)
+        total_sum += line_result
+
+    return total_sum
+
+
 if __name__ == "__main__":
+    # Part 1
     num_list = read_input("day_2_data.txt")
     answer_1 = calculate_checksum(num_list)
     print(f"Part 1: {answer_1}")
+    # Part 2
+    answer_2 = calculate_even_division_sum(num_list)
+    print(f"Part 2: {answer_2}")
