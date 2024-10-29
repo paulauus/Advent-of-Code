@@ -20,6 +20,21 @@ def calculate_frequency_change(data: list) -> int:
     return frequency
 
 
+def find_repeating_frequency(data: list) -> int:
+    """Calculates the resulting frequency after all changes."""
+    frequency = 0
+    frequency_list = []
+    for change in data:
+        a, b = change[0], int(change[1:])
+        if a == "+":
+            frequency += b
+        else:
+            frequency -= b
+        frequency_list.append(frequency)
+        if frequency in frequency_list:
+            return frequency
+
+
 if __name__ == "__main__":
     readings = read_input("day_1_data.txt")
     # Part 1
