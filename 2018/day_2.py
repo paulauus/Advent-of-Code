@@ -5,7 +5,7 @@ def read_input(filename: str) -> list[str]:
     """Reads a text file into a list."""
     with open(filename, "r", encoding="UTF-8") as f:
         return f.readlines()
-    
+
 
 def calculate_checksum(boxes: list[str]) -> int:
     """Calculates the checksum of the list of box IDs."""
@@ -22,10 +22,10 @@ def calculate_checksum(boxes: list[str]) -> int:
             two_counts += 1
         if 3 in box_dict.values():
             three_counts += 1
-    
+
     return two_counts * three_counts
 
-    
+
 if __name__ == "__main__":
     data = read_input("day_2_data.txt")
     answer_1 = calculate_checksum(data)
