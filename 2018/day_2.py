@@ -27,6 +27,7 @@ def calculate_checksum(boxes: list[str]) -> int:
 
     return two_counts * three_counts
 
+
 def find_similar_boxes(boxes: list[str]) -> list[str]:
     """Finds the two words where one letter is different."""
     similar_boxes = []
@@ -39,8 +40,19 @@ def find_similar_boxes(boxes: list[str]) -> list[str]:
     return similar_boxes
 
 
+def find_common_letters(words: list[str]) -> str:
+    """Finds the common letters of two strings."""
+    common_letters = ""
+    for i, letter in enumerate(words[0]):
+        if words[0][i] == words[1][i]:
+            common_letters += letter
+
+    return common_letters
+
+
 if __name__ == "__main__":
     data = read_input("day_2_data.txt")
     answer_1 = calculate_checksum(data)
     print(f"Part 1: {answer_1}")
-    print(find_similar_boxes(data))
+    answer_2 = find_common_letters(find_similar_boxes(data))
+    print(f"Part 2: {answer_2}")
