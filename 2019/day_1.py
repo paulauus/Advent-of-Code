@@ -17,6 +17,20 @@ def calculate_fuel_requirement(modules: list[str]) -> int:
 
     return fuel_requirement
 
+
+def calculate_added_fuel_requirement(modules: list[str]) -> int:
+    """Calculates the fuel requirement with added mass."""
+    fuel_requirement = 0
+    for module in modules:
+        mass = int(module)
+        while mass > 0:
+            mass = (math.floor(mass / 3) - 2)
+            if mass > 0:
+                fuel_requirement += mass
+
+    return fuel_requirement
+
+
 if __name__ == "__main__":
     data = read_input("day_1_data.txt")
     answer_1 = calculate_fuel_requirement(data)
