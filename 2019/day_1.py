@@ -35,3 +35,5 @@ if __name__ == "__main__":
     data = read_input("day_1_data.txt")
     answer_1 = calculate_fuel_requirement(data)
     print(f"Part 1: {answer_1}")
+    answer_2 = calculate_added_fuel_requirement(data)
+    print(f"Part 2; {answer_2}")
