@@ -32,8 +32,25 @@ def run_program(program_data: list[int]) -> int:
     return program_data[0]
 
 
+def find_noun_and_verb(program_data: list[int]) -> int:
+    """Finds the input noun and verb that cause the program to produce the output 19690720."""
+    for noun in range(100):
+        for verb in range(100):
+            # Make a fresh copy of program_data for each attempt
+            attempt_data = program_data[:]
+            attempt_data[1] = noun
+            attempt_data[2] = verb
+            answer = run_program(attempt_data)
+            if answer == 19690720:
+                return 100 * noun + verb
+
+
 if __name__ == "__main__":
     data = read_input("day_2_data.txt")
+    # Part 1
     data[1], data[2] = 12, 2
     answer_1 = run_program(data)
     print(f"Part 1: {answer_1}")
+    # Part 2
+    answer_2 = find_noun_and_verb(data)
+    print(f"Part 2: {answer_2}")
