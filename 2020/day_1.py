@@ -12,7 +12,9 @@ def find_two_entries(numbers: list[str]) -> tuple:
         for b in numbers:
             if int(a) + int(b) == 2020:
                 return (int(a), int(b))
-            
+
+    return None
+
 
 def multiply_numbers(num_pair: tuple) -> int:
     """Multiplies two numbers."""
