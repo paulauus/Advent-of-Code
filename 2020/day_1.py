@@ -21,7 +21,7 @@ def find_two_entries(numbers: list[str]) -> tuple:
 def multiply_numbers(num_pair: tuple) -> int:
     """Multiplies two numbers."""
     result = math.prod(list(num_pair))
-    
+
     return result
 
 
@@ -44,4 +44,3 @@ if __name__ == "__main__":
     # Part 2
     answer_2 = multiply_numbers(find_three_entries(data))
     print(f"Part 2: {answer_2}")
-    
