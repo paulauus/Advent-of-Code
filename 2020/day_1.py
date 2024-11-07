@@ -42,4 +42,6 @@ if __name__ == "__main__":
     answer_1 = multiply_numbers(find_two_entries(data))
     print(f"Part 1: {answer_1}")
     # Part 2
+    answer_2 = multiply_numbers(find_three_entries(data))
+    print(f"Part 2: {answer_2}")
     
