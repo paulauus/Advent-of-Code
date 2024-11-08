@@ -4,7 +4,7 @@ def read_input(filename: str) -> list[str]:
     """Reads a text file into a list of strings."""
     with open(filename, "r", encoding="UTF-8") as f:
         return f.readlines()
-    
+
 
 def clean_input(lines: list[str]) -> list[list[str]]:
     """Cleans the data from the text file into usable format."""
