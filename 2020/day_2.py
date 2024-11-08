@@ -26,16 +26,14 @@ def count_valid_passwords(passwords: list) -> int:
     """Counts the number of valid passwords in the input data."""
     valid_password_count = 0
 
-    for password in passwords:
-        if password[1] in password[2]:
-            letter_count = {}
-            for letter in password[2]:
-                if letter in letter_count:
-                    letter_count[letter] += 1
-                else:
-                    letter_count[letter] = 1
-            if int(password[0][0]) <= letter_count[password[1]] <= int(password[0][1]):
-                valid_password_count += 1
+    for limits, letter, password in passwords:
+        # Unpack min and max directly
+        min_count, max_count = limits
+        letter = letter[0]  # Remove the colon
+
+        # Check if the letter count is within the allowed range
+        if int(min_count) <= password.count(letter) <= int(max_count):
+            valid_password_count += 1
 
     return valid_password_count
 
