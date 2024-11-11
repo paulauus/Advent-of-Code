@@ -1,5 +1,6 @@
 """Day 2: Password Philosophy"""
 
+
 def read_input(filename: str) -> list[str]:
     """Reads a text file into a list of strings."""
     with open(filename, "r", encoding="UTF-8") as f:
@@ -38,9 +39,25 @@ def count_valid_passwords(passwords: list) -> int:
     return valid_password_count
 
 
+def count_new_valid_passwords(passwords: list) -> int:
+    """Counts the number of valid passports with new rules."""
+    valid_password_count = 0
+
+    for limits, letter, password in passwords:
+        min_index, max_index = limits
+        letter = letter[0]
+
+        positions = password[(int(min_index)-1):max_index]
+
+        if positions.count(letter) == 1:
+            valid_password_count += 1
+
+    return valid_password_count
+
 if __name__ == "__main__":
     data = read_input("day_2_data.txt")
     # Part 1
     clean_data = clean_input(data)
     answer_1 = count_valid_passwords(clean_data)
     print(f"Part 1: {answer_1}")
+    
