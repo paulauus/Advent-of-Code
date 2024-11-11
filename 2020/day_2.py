@@ -40,16 +40,18 @@ def count_valid_passwords(passwords: list) -> int:
 
 
 def count_new_valid_passwords(passwords: list) -> int:
-    """Counts the number of valid passports with new rules."""
+    """Counts the number of valid passwords with new rules."""
     valid_password_count = 0
 
     for limits, letter, password in passwords:
-        min_index, max_index = limits
+        pos1, pos2 = limits
         letter = letter[0]
 
-        positions = password[(int(min_index)-1):max_index]
+        # Check if exactly one of the positions contains the letter
+        first_position_matches = password[int(pos1) - 1] == letter
+        second_position_matches = password[int(pos2) - 1] == letter
 
-        if positions.count(letter) == 1:
+        if first_position_matches != second_position_matches:  # XOR logic
             valid_password_count += 1
 
     return valid_password_count
@@ -60,4 +62,6 @@ if __name__ == "__main__":
     clean_data = clean_input(data)
     answer_1 = count_valid_passwords(clean_data)
     print(f"Part 1: {answer_1}")
-    
+    # Part 2
+    answer_2 = count_new_valid_passwords(clean_data)
+    print(f"Part 2: {answer_2}")
