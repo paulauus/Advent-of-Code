@@ -21,8 +21,26 @@ def find_highest_calories(calories: list[str]) -> int:
 
     return max(calorie_totals)
 
+
+def find_three_highest_calories_sum(calories: list[str]) -> int:
+    """Returns the highest calorie total from the list."""
+    calorie_totals = []
+    elf_total = 0
+
+    for item in calories:
+        if item == '\n':
+            calorie_totals.append(elf_total)
+            elf_total = 0
+        else:
+            elf_total += int(item)
+
+    return sum(sorted(calorie_totals, reverse=True)[:3])
+
 if __name__ == "__main__":
     data = read_input("day_1_data.txt")
     # Part 1
     answer_1 = find_highest_calories(data)
     print(f"Part 1: {answer_1}")
+    # Part 2
+    answer_2 = find_three_highest_calories_sum(data)
+    print(f"Part 2: {answer_2}")
