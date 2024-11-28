@@ -4,7 +4,7 @@ def read_input(filename: str) -> list[str]:
     """Reads the .txt file into a list of strings."""
     with open(filename, "r", encoding="UTF-8") as f:
         return f.readlines()
-    
+
 
 def find_numbers(calibration: list[str]) -> list[int]:
     """Decodes the calibration document and creates a list of numbers."""
@@ -40,4 +40,3 @@ if __name__ == "__main__":
     # Part 1
     answer_1 = add_numbers(find_numbers(data))
     print(f"Part 1: {answer_1}")
-    
