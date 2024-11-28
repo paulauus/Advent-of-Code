@@ -29,6 +29,15 @@ def find_numbers(calibration: list[str]) -> list[int]:
     return values
 
 
+def add_numbers(numbers_list: list[int]) -> int:
+    """Adds together all numbers in a list."""
+
+    return sum(numbers_list)
+
+
 if __name__ == "__main__":
     data = read_input("day_1_data.txt")
+    # Part 1
+    answer_1 = add_numbers(find_numbers(data))
+    print(f"Part 1: {answer_1}")
     
