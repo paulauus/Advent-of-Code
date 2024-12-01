@@ -29,8 +29,8 @@ def find_numbers(calibration: list[str]) -> list[int]:
     return values
 
 
-def find_numbers_with_words(calibration: list[str]) -> list[int]:
-    """Decodes the calibration document, including words, and creates a list of numbers."""
+def replace_words_with_numbers(calibration: list[str]) -> list[int]:
+    """Replaces words with the equivalent numbers."""
     ...
 
 
