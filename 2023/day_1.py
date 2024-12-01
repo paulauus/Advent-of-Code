@@ -29,6 +29,11 @@ def find_numbers(calibration: list[str]) -> list[int]:
     return values
 
 
+def find_numbers_with_words(calibration: list[str]) -> list[int]:
+    """Decodes the calibration document, including words, and creates a list of numbers."""
+    ...
+
+
 def add_numbers(numbers_list: list[int]) -> int:
     """Adds together all numbers in a list."""
 
