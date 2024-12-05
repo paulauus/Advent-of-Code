@@ -56,6 +56,42 @@ def find_valid_updates(rules: list[tuple[int, int]], updates: list[list[int]]) -
     return valid_updates
 
 
+def find_invalid_updates(rules: list[tuple[int, int]], updates: list[list[int]]) -> list[list[int]]:
+    """Returns only the invalid updates from the initial list."""
+    invalid_updates = []
+
+    for update in updates:
+        is_valid = True
+
+        for before, after in rules:
+            if before in update and after in update:
+                if update.index(before) > update.index(after):
+                    is_valid = False  # Rule violated
+                    break
+
+        if not is_valid:
+            invalid_updates.append(update)
+
+    return invalid_updates
+
+
+def reorder_invalid_updates(rules: list[tuple[int, int]], invalid_updates: list[list[int]]
+                            ) -> list[list[int]]:
+    """Reorders the invalid updates according to the correct rules."""
+    for update in invalid_updates:
+        reordered = True  # Flag to track if changes were made in this iteration
+        while reordered:
+            reordered = False
+            for before, after in rules:
+                if before in update and after in update:
+                    before_idx = update.index(before)
+                    after_idx = update.index(after)
+                    if before_idx > after_idx:
+                        # Swap the positions of before and after
+                        update.insert(after_idx, update.pop(before_idx))
+                        reordered = True
+    return invalid_updates
+
 def find_sum_of_middle_numbers(valid_updates: list[list[int]]) -> int:
     """Adds the middle number of each line."""
     total = 0
@@ -74,3 +110,7 @@ if __name__ == "__main__":
     # Part 1
     answer_1 = find_sum_of_middle_numbers(find_valid_updates(rules, updates))
     print(f"Part 1: {answer_1}")
+    # Part 2
+    answer_2 = find_sum_of_middle_numbers(reorder_invalid_updates(
+        rules, find_invalid_updates(rules, updates)))
+    print(f"Part 2: {answer_2}")
