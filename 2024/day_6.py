@@ -9,8 +9,6 @@ def read_lines(filename: str) -> list[str]:
 def find_distinct_positions(mapped_area: list[str]) -> int:
     """Returns the number of distinct positions visited by the guard."""
     distinct_positions = []
-    max_width = len(mapped_area[0]) - 1
-    max_length = len(mapped_area) - 1
     directions = ["up", "right", "down", "left"]
     moves = {
         "up": (0, -1),
@@ -26,10 +24,25 @@ def find_distinct_positions(mapped_area: list[str]) -> int:
                 y = i
                 distinct_positions.append((x, y))
 
-    direction = "up"
+    direction = 0
 
     while True:
+        next_x = x + moves[directions[direction]][0]
+        next_y = y + moves[directions[direction]][1]
         
+        if next_x not in range(len(mapped_area[0])) or next_y not in range(len(mapped_area)):
+            break
+
+        if mapped_area[next_y][next_x] == "#":
+            direction = (direction + 1) % len(directions)
+
+        else:
+            x, y = next_x, next_y
+            if (x, y) not in distinct_positions:
+                distinct_positions.append((x, y))
+            print((x, y))
+
+    return len(distinct_positions)
 
     
 if __name__ == "__main__":
