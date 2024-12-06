@@ -4,6 +4,17 @@ def read_lines(filename: str) -> list[str]:
     """Reads the .txt file into a list of strings."""
     with open(filename, "r", encoding="UTF-8") as f:
         return [line.strip() for line in f.readlines()]
+    
+
+def get_starting_position(mapped_area: list[str]) -> tuple:
+    """Returns the starting position coordinates."""
+    for i, row in enumerate(mapped_area):
+        for j, spot in enumerate(row):
+            if spot == "^":
+                x = j
+                y = i
+
+    return x, y
 
 
 def find_distinct_positions(mapped_area: list[str]) -> int:
@@ -17,12 +28,8 @@ def find_distinct_positions(mapped_area: list[str]) -> int:
         "left": (-1, 0)
     }
 
-    for i, row in enumerate(mapped_area):
-        for j, spot in enumerate(row):
-            if spot == "^":
-                x = j
-                y = i
-                distinct_positions.append((x, y))
+    x, y = get_starting_position(mapped_area)
+    distinct_positions.append((x, y))
 
     direction = 0
 
