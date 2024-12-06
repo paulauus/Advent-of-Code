@@ -40,11 +40,11 @@ def find_distinct_positions(mapped_area: list[str]) -> int:
             x, y = next_x, next_y
             if (x, y) not in distinct_positions:
                 distinct_positions.append((x, y))
-            print((x, y))
 
     return len(distinct_positions)
 
 
 if __name__ == "__main__":
     data = read_lines("day_6_data.txt")
-    print(find_distinct_positions(data))
+    answer_1 = find_distinct_positions(data)
+    print(f"Part 1: {answer_1}")
