@@ -7,7 +7,7 @@ def read_lines(filename: str) -> list[str]:
     """Reads the .txt file into a list of strings."""
     with open(filename, "r", encoding="UTF-8") as f:
         return [line.strip() for line in f.readlines()]
-    
+
 
 def get_integers(raw_input: list[str]) -> list[list[int]]:
     """Extracts numbers from the raw input as a list of lists."""
@@ -28,7 +28,7 @@ def find_total_calibration_result(clean_data: list[list[int]]) -> int:
     total_calibration_result = 0
 
     for test in clean_data:
-        combinations = [''.join(p) for p in product("+*", repeat=(len(test)-2))]
+        combinations = [''.join(p) for p in product("+*", repeat=len(test)-2)]
         for c in combinations:
             total = test[1]
             for i, op in enumerate(c):
@@ -49,7 +49,7 @@ def find_total_using_third_operator(clean_data: list[list[int]]) -> int:
 
     for test in clean_data:
         combinations = [''.join(p)
-                        for p in product("+*/", repeat=(len(test)-2))]
+                        for p in product("+*/", repeat=len(test)-2)]
         for c in combinations:
             total = test[1]
             for i, op in enumerate(c):
