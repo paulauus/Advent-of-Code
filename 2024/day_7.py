@@ -1,5 +1,7 @@
 """Day 7: Bridge Repair"""
 
+from itertools import product
+
 
 def read_lines(filename: str) -> list[str]:
     """Reads the .txt file into a list of strings."""
@@ -10,7 +12,7 @@ def read_lines(filename: str) -> list[str]:
 def get_integers(raw_input: list[str]) -> list[list[int]]:
     """Extracts numbers from the raw input as a list of lists."""
     final_list = []
-    
+
     for line in raw_input:
         int_list = []
         list_1 = line.split(":")
@@ -21,7 +23,28 @@ def get_integers(raw_input: list[str]) -> list[list[int]]:
 
     return final_list
 
+def find_total_calibration_result(clean_data: list[list[int]]) -> int:
+    """Finds the sum of all valid test values."""
+    total_calibration_result = 0
+
+    for test in clean_data:
+        combinations = [''.join(p) for p in product("+*", repeat=(len(test)-2))]
+        for c in combinations:
+            total = test[1]
+            for i, op in enumerate(c):
+                if op == "+":
+                    total = total + test[i+2]
+                if op == "*":
+                    total = total * test[i+2]
+            if total == test[0]:
+                total_calibration_result += test[0]
+                break
+
+    return total_calibration_result
+
+
 if __name__ == "__main__":
     data = read_lines("day_7_data.txt")
-    clean_data = get_integers(data)
-    print(clean_data)
+    cleaned_data = get_integers(data)
+    answer_1 = find_total_calibration_result(cleaned_data)
+    print(answer_1)
