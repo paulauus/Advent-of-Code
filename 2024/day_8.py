@@ -29,10 +29,12 @@ def find_unique_antinode_locations(coordinates: list[list[int | str]], grid: lis
             if match[0] == antenna[0]:
                 x_diff = match[1] - antenna[1]
                 y_diff = match[2] - antenna[2]
+
                 antinode_x1, antinode_y1 = antenna[1] - x_diff, antenna[2] - y_diff
                 if 0 <= antinode_x1 < len(grid[0]) and 0 <= antinode_y1 < len(grid) and (
                     antinode_x1, antinode_y1) not in antinodes:
                     antinodes.append((antinode_x1, antinode_y1))
+
                 antinode_x2, antinode_y2 = match[1] + x_diff, match[2] + y_diff
                 if 0 <= antinode_x2 < len(grid[0]) and 0 <= antinode_y2 < len(grid) and (
                     antinode_x2, antinode_y2) not in antinodes:
@@ -74,9 +76,11 @@ def find_updated_locations(coordinates: list[list[int | str]], grid: list[str]):
 if __name__ == "__main__":
     data = read_lines("day_8_data.txt")
     antenna_coordinates = get_antenna_coordinates(data)
+
     # Part 1
     answer_1 = find_unique_antinode_locations(antenna_coordinates, data)
     print(f"Part 1: {answer_1}")
+    
     # Part 2
     answer_2 = find_updated_locations(antenna_coordinates, data)
     print(f"Part2: {answer_2}")
