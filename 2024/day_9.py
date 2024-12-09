@@ -63,8 +63,62 @@ def solve_disk_fragmenter(disk_map: str) -> int:
     return calculate_checksum(compacted_blocks)
 
 
+def compact_files(data: str) -> int:
+    """
+    Compact files by moving whole files into the leftmost free space
+    that fits, and return the checksum of the resulting layout.
+    """
+    is_file = True
+    # Store file locations and sizes as {file_id: (start_position, size)}
+    files = {}
+    spaces = []  # Store free spaces as [(start_position, size)]
+    ptr = 0
+
+    # Parse the input into files and spaces
+    for i, size in enumerate(map(int, data)):
+        if is_file:
+            files[i // 2] = (ptr, size)
+        else:
+            spaces.append((ptr, size))
+        is_file = not is_file
+        ptr += size
+
+    # Process files in reverse order of file ID
+    for fid in sorted(files.keys(), reverse=True):
+        loc, file_size = files[fid]
+        space_id = 0
+        while space_id < len(spaces):
+            space_loc, space_size = spaces[space_id]
+            # Stop if the free space is past the file
+            if space_loc > loc:
+                break
+            if space_size == file_size:
+                # Exact fit
+                files[fid] = (space_loc, file_size)
+                spaces.pop(space_id)
+                break
+            if space_size > file_size:
+                # Partial fit, update the free space
+                files[fid] = (space_loc, file_size)
+                spaces[space_id] = (space_loc + file_size,
+                                    space_size - file_size)
+                break
+            # Move to the next free space
+            space_id += 1
+
+    # Calculate the checksum
+    checksum = 0
+    for fid, (loc, size) in files.items():
+        for i in range(loc, loc + size):
+            checksum += fid * i
+
+    return checksum
+
 if __name__ == "__main__":
     disk_map = read_input("day_9_data.txt")
     # Part 1
     answer_1 = solve_disk_fragmenter(disk_map)
     print(f"Part 1: {answer_1}")
+    # Part 2
+    answer_2 = compact_files(disk_map)
+    print(f"Part 2: {answer_2}")
