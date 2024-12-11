@@ -4,22 +4,24 @@ from functools import cache
 
 def read_input(filename: str) -> list[int]:
     """Reads the .txt input into a list of integers."""
-    return list(map(int, open(filename, 'r').read().strip().split()))
+    return list(map(int, open(filename, 'r', encoding="UTF-8").read().strip().split()))
 
 @cache
 def corresponding_value(value: int):
+    """Returns the new value of a number on a stone."""
     length = len(str(value))
     if value == 0:
         return 1
 
-    elif length % 2 == 0:
+    if length % 2 == 0:
         return [int(str(value)[:length//2]), int(str(value)[length//2:])]
-    else:
-        return value*2024
+
+    return value*2024
 
 
 @cache
 def split_amount(number: int, iterations: int) -> int:
+    """Calls corresponding_value for each stone and tracks how many splits occur."""
     overall = number
     splits = 0
     for i in range(iterations):
