@@ -41,3 +41,9 @@ if __name__ == "__main__":
     answer_1 = (len(data)+sum(split_amount(i, max_iterations)
           for i in data))
     print(f"Part 1: {answer_1}")
+
+    # Part 2
+    max_iterations = 75
+    answer_2 = (len(data)+sum(split_amount(i, max_iterations)
+                              for i in data))
+    print(f"Part 2: {answer_2}")
