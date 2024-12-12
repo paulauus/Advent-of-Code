@@ -54,7 +54,44 @@ def calculate_total_price(filename):
     return total_price
 
 
+def calculate_total_price_part_2(filename):
+    grid = read_input(filename)
+    Z = [cell for row in grid for cell in row]  # Flatten the grid
+    S = len(grid[0])  # Number of columns
+    total_price = 0
+    visited = set()  # Keep track of visited cells
+
+    def E(i, c):
+        """Checks if a boundary condition is met."""
+        return Z[i] != c
+
+    def U(i):
+        """Recursive function to calculate the area and perimeter."""
+        c = Z[i]  # Current cell
+        f = 0  # Perimeter
+        a = 1  # Area
+        Q = [i >= S and -S, (i + 1) % S and 1, i < S * S - S and S, i % S and -1]  # Directions
+        visited.add(i)  # Mark as visited
+        for g, j in enumerate(Q):
+            b = Q[(g + 3) % 4]  # Get opposite direction
+            f += (not j and (not b or E(i + b, c))) or (E(i + j, c) and (not b or E(i + b, c) or not E(i + b + j, c)))
+            if Z[i + j] == c and (i + j) not in visited:
+                F, A = U(i + j)
+                f += F
+                a += A
+        return f, a
+
+    for x in range(len(Z)):
+        if x not in visited:  # If not visited
+            y, z = U(x)
+            total_price += y * z
+
+    return total_price
+
 if __name__ == "__main__":
     # Part 1
     answer_1 = calculate_total_price("day_12_data.txt")
     print(f"Part 1: {answer_1}")
+
+    answer_2 = calculate_total_price_part_2("day_12_data.txt")
+    print(f"Part 2: {answer_2}")
