@@ -19,7 +19,8 @@ def read_input(filename: str) -> list[dict]:
     return machines
 
 
-def solve_claw_machine(a: list[int], b: list[int], prize: list[int], max_presses: int = 100) -> Optional[int]:
+def solve_claw_machine(
+        a: list[int], b: list[int], prize: list[int], max_presses: int = 100) -> Optional[int]:
     """
     Solves the claw machine problem for one machine.
     Returns the minimum tokens needed, or None if no solution exists.
@@ -48,13 +49,13 @@ def solve_claw_machine(a: list[int], b: list[int], prize: list[int], max_presses
     return min_cost if found_solution else None
 
 
-def solve_all_claw_machines(data: list[dict]) -> int:
+def solve_all_claw_machines(machines: list[dict]) -> int:
     """
     Solves the claw machine problem for all machines.
     Returns the total minimum tokens needed to win all possible prizes.
     """
     total_tokens = 0
-    for machine in data:
+    for machine in machines:
         a = machine["A"]
         b = machine["B"]
         prize = machine["prize"]
