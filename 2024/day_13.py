@@ -1,8 +1,9 @@
 """Day 13: Claw Contraption"""
 
+from typing import Optional
+
 import numpy as np
 from numpy.linalg import solve
-from typing import Optional
 
 
 CORRECTION = 10000000000000
@@ -38,14 +39,14 @@ def solve_claw_machine_part2(a: list[int], b: list[int], prize: list[int]) -> Op
     prize = np.array(prize) + CORRECTION
 
     # Converting button presses A and B to numpy arrays
-    AB = np.column_stack((a, b))
+    ab = np.column_stack((a, b))
 
     # Solve the system of linear equations: AB * solution = prize
     try:
         # Round the solution to nearest integers
-        solution = np.rint(solve(AB, prize))
+        solution = np.rint(solve(ab, prize))
         # If the solution is valid (i.e., it satisfies the equation)
-        if np.all(AB @ solution == prize):
+        if np.all(ab @ solution == prize):
             return cost(*solution)  # Calculate the cost
     except np.linalg.LinAlgError:
         return None  # Return None if the system is not solvable
@@ -70,7 +71,8 @@ def solve_all_claw_machines_part2(machines: list[dict]) -> int:
     return total_tokens
 
 
-def solve_claw_machine(a: list[int], b: list[int], prize: list[int], max_presses: int = 100) -> Optional[int]:
+def solve_claw_machine(
+        a: list[int], b: list[int], prize: list[int], max_presses: int = 100) -> Optional[int]:
     """
     Solves the claw machine problem for one machine.
     Returns the minimum tokens needed, or None if no solution exists.
